@@ -1,0 +1,5 @@
+GCLOUD_PROJECT=<your gcloud project-id>
+GCLOUD_PROJECT_KEY=< content of your gcloud service account json.key (remove the line breaks!)> 
+GCLOUD_SERVICEACCOUNT=<your gcloud serviceaccount>
+GCLOUD_CLUSTER=<your gke cluster>
+GCLOUD_CLUSTER_ZONE=<your gke cluster zone>
