@@ -2,7 +2,7 @@ FROM alpine:3.6
 
 ENV VERSION v2.11.0
 
-MAINTAINER Trevor Hartman <trevorhartman@gmail.com>
+LABEL maintainer="alitari67@gmail.com"
 
 WORKDIR /
 
