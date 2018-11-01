@@ -1,6 +1,5 @@
 FROM alpine:3.6
 
-ENV VERSION v2.11.0
 
 LABEL maintainer="alitari67@gmail.com"
 
@@ -22,7 +21,8 @@ RUN google-cloud-sdk/install.sh --usage-reporting=true --path-update=true --bash
 RUN google-cloud-sdk/bin/gcloud config set --installation component_manager/disable_update_check true
 
 # Install Helm
-ENV FILENAME helm-${VERSION}-linux-amd64.tar.gz
+ENV HELM_VERSION v2.11.0
+ENV FILENAME helm-${HELM_VERSION}-linux-amd64.tar.gz
 ENV HELM_URL https://storage.googleapis.com/kubernetes-helm/${FILENAME}
 
 RUN echo $HELM_URL
@@ -44,13 +44,15 @@ RUN helm plugin install https://github.com/viglesiasce/helm-gcs.git
 RUN helm plugin install https://github.com/databus23/helm-diff
 
 # Install skaffold
-RUN curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 \
+ENV SKAFFOLD_VERSION v0.17.0
+RUN curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/${SKAFFOLD_VERSION}/skaffold-linux-amd64 \
     && chmod +x skaffold \
     && mv skaffold /usr/local/bin
 
-# Install docker 
-RUN curl -L -o /tmp/docker-17.09.1-ce.tgz https://download.docker.com/linux/static/stable/x86_64/docker-17.09.1-ce.tgz \
-    && tar -xz -C /tmp -f /tmp/docker-17.09.1-ce.tgz \
+# Install docker
+ENV DOCKER_VERSION 17.09.1-ce
+RUN curl -L -o /tmp/docker-${DOCKER_VERSION}.tgz https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
+    && tar -xz -C /tmp -f /tmp/docker-${DOCKER_VERSION}.tgz \
     && mv /tmp/docker/* /usr/bin \
     && rm -rf /tmp/*
 
