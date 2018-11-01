@@ -5,7 +5,7 @@ If you want to deploy your application with skaffold on a gcloud kubernetes clus
 1. _build image_: `docker build -t skaffold .`
 2. _configuration_: Create an `env-file` with environment variables for your gcloud kubernetes cluster. See [env-file-template](./env-file-template)
 3. _run image_: run the image with the configuration and mount the source directory of your skaffold project `docker run -it -v /$(pwd):/skaffold-project --env-file=env-file skaffold bash`
-4. _run skaffold_: run skaffold `cd /skaffold-project && skaffold run`
+4. _run skaffold_: `cd /skaffold-project && skaffold run`
 
 ## Credits
 
