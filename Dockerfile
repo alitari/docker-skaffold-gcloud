@@ -21,7 +21,7 @@ RUN google-cloud-sdk/install.sh --usage-reporting=true --path-update=true --bash
 RUN google-cloud-sdk/bin/gcloud config set --installation component_manager/disable_update_check true
 
 # Install Helm
-ENV HELM_VERSION v2.11.0
+ENV HELM_VERSION v2.13.0
 ENV FILENAME helm-${HELM_VERSION}-linux-amd64.tar.gz
 ENV HELM_URL https://storage.googleapis.com/kubernetes-helm/${FILENAME}
 
@@ -44,13 +44,13 @@ RUN helm plugin install https://github.com/viglesiasce/helm-gcs.git
 RUN helm plugin install https://github.com/databus23/helm-diff
 
 # Install skaffold
-ENV SKAFFOLD_VERSION v0.17.0
+ENV SKAFFOLD_VERSION v0.25.0
 RUN curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/${SKAFFOLD_VERSION}/skaffold-linux-amd64 \
     && chmod +x skaffold \
     && mv skaffold /usr/local/bin
 
 # Install docker
-ENV DOCKER_VERSION 17.09.1-ce
+ENV DOCKER_VERSION 18.06.3-ce
 RUN curl -L -o /tmp/docker-${DOCKER_VERSION}.tgz https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz \
     && tar -xz -C /tmp -f /tmp/docker-${DOCKER_VERSION}.tgz \
     && mv /tmp/docker/* /usr/bin \
